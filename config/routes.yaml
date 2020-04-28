@@ -1,0 +1,14 @@
+# Set index (default) Controller
+index:
+  path: /
+  controller: App\Controller\Web\IndexController::index
+
+app_login:
+  path: /login
+
+app_logout:
+  path: /logout
+
+controllers:
+  resource: '../src/Controller/'
+  type:     annotation

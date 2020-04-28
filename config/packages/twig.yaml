@@ -1,0 +1,4 @@
+twig:
+    default_path: '%kernel.project_dir%/templates'
+    # Enable / disable caching for TWIG templates engine
+    cache: false
