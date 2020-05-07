@@ -16,4 +16,4 @@
 ###< symfony/phpunit-bridge ###
 
 /nginx_local_conf/
-/config/doctrine.yaml
+/config/packages/doctrine.yaml

@@ -1,0 +1,46 @@
+# ------------------------------------------------------------------------------------
+# Forms
+# ------------------------------------------------------------------------------------
+
+#     Languages
+# -------------
+English: English
+Русский: Русский
+
+#     Common phrases
+# ------------------
+actions: действия
+no records found: записи не найдены
+Create new: создать новую
+show: просмотреть
+edit: редактировать
+back to list: вернуться к списку
+Update: Обновить
+Save: Сохранить
+Delete: Удалить
+Are you sure you want to delete this item?: Вы уверены, что хотите удалить эту запись?
+
+
+# User forms
+# ---------
+
+#     Fields
+# ----------
+Id: Id
+Email: Email
+Api token: Api токен
+Roles: Роли
+User: Пользователь
+Admin: Администратор
+SuperAdmin: Системный администратор
+Locale: Язык
+Password: Пароль
+Choose user roles: Выберите роли пользователя
+Choose language: Выберите язык
+
+#     Meta phrases
+# ----------------
+User list: Список пользователей
+Edit User: Редактирование пользователя
+New User: Новый пользователь
+Create new User: Создать нового пользователя

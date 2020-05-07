@@ -28,6 +28,11 @@ class User implements UserInterface
      private $apiToken;
 
     /**
+     * @ORM\Column(type="string", unique=false, nullable=false)
+     */
+    private $locale;
+
+    /**
      * @ORM\Column(type="json")
      */
     private $roles = [];
@@ -69,6 +74,22 @@ class User implements UserInterface
         $this->email = $email;
 
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLocale()
+    {
+        return $this->locale;
+    }
+
+    /**
+     * @param mixed $locale
+     */
+    public function setLocale($locale)
+    {
+        $this->locale = $locale;
     }
 
     /**

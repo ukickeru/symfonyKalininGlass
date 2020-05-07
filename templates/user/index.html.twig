@@ -3,17 +3,18 @@
 {% block title %}User index{% endblock %}
 
 {% block body %}
-    <h1>User index</h1>
+    <h1>{{'User list'|trans}}</h1>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Email</th>
-                <th>ApiToken</th>
-                <th>Roles</th>
-                <th>Password</th>
-                <th>actions</th>
+                <th>{{ 'Id'|trans }}</th>
+                <th>{{ 'Email'|trans }}</th>
+                <th>{{ 'Api token'|trans }}</th>
+                <th>{{ 'Roles'|trans }}</th>
+                <th>{{ 'Password'|trans }}</th>
+                <th>{{ 'Locale'|trans }}</th>
+                <th>{{ 'actions'|trans }}</th>
             </tr>
         </thead>
         <tbody>
@@ -24,18 +25,19 @@
                 <td>{{ user.apiToken }}</td>
                 <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
                 <td>{{ user.password }}</td>
+                <td>{{ user.locale }}</td>
                 <td>
-                    <a href="{{ path('user_show', {'id': user.id}) }}">show</a>
-                    <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
+                    <a href="{{ path('user_show', {'id': user.id}) }}">{{ 'show'|trans }}</a>
+                    <a href="{{ path('user_edit', {'id': user.id}) }}">{{ 'edit'|trans }}</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="6">no records found</td>
+                <td colspan="6">{{ 'no records found'|trans }}</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('user_new') }}">Create new</a>
+    <a href="{{ path('user_new') }}">{{ 'Create new'|trans }}</a>
 {% endblock %}

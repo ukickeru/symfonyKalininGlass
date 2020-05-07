@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\Api\EnableApi;
+namespace App\Service\Api\EnableApi;
 
 use Symfony\Component\HttpKernel\Event\ResponseEvent;
 use Symfony\Component\HttpFoundation\Response;
@@ -30,11 +30,6 @@ class CorsEnable
 
             // Извлечение текущего запроса
             $request = $this->requestStack->getCurrentRequest();
-
-            // Если текущий запрос был совершён к контроллеру, принадлежащему 'App\Controller\Api' namespace
-            // if ( strpos( $request->attributes->get('_controller'), 'Api' ) != false ) {
-            //
-            // }
 
             if ($responseEvent->getRequest()->getMethod() === 'OPTIONS') {
                 // Вручную разрешаем CORS для функционирования Api,

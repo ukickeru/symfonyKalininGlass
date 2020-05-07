@@ -26,9 +26,20 @@ class UserType extends AbstractType
                     'Admin' => 'ROLE_ADMIN',
                     'SuperAdmin' => 'ROLE_SUPER_ADMIN',
                 ],
-                'placeholder' => 'Выберите роль пользователя',
+                'placeholder' => 'Choose user roles',
                 'required' => true,
                 'multiple' => true,
+                // 'expanded' => true,
+                // 'mapped' => true
+            ])
+            ->add('locale', ChoiceType::class, [
+                'choices' => [
+                    'English' => 'en',
+                    'Русский' => 'ru',
+                ],
+                'placeholder' => 'Choose language',
+                'required' => true,
+                // 'multiple' => false,
                 // 'expanded' => true,
                 // 'mapped' => true
             ])

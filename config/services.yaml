@@ -1,53 +1,77 @@
-# This file is the entry point to configure your own services.
-# Files in the packages/ subdirectory configure your dependencies.
-
-# Put parameters here that don't need to change on each machine where the app is deployed
-# https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     'app.ENABLE_CORS': true # Enable CORS for API using
+    'app.ENABLE_LOCALE': true # Enable CORS for API using
+
 
 services:
-    # default configuration for services in *this* file
     _defaults:
-        autowire: true      # Automatically injects dependencies in your services.
-        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        autowire: true
+        autoconfigure: true
 
-    # makes classes in src/ available to be used as services
-    # this creates a service per class whose id is the fully-qualified class name
     App\:
         resource: '../src/*'
         exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
 
-    # controllers are imported separately to make sure services can be injected
-    # as action arguments even if you don't extend any base controller class
+
+
+    # ---------------------------------------------------------------------------
+    # Controllers
+    # ---------------------------------------------------------------------------
     App\Controller\:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
 
-    # add more service definitions when explicit configuration is needed
-    # please note that last definitions always *replace* previous ones
+    # Web controllers
+    # ---------------------------------------------------------------------------
     App\Controller\Web\:
         resource: '../src/Controller/Web'
         tags: ['controller.service_arguments']
 
+    # Api controllers
+    # ---------------------------------------------------------------------------
     App\Controller\Api\:
         resource: '../src/Controller/Api'
         tags: ['controller.service_arguments']
 
-    # ---------------------------------------------------------------------------
-    # Api token authentication service
-    # ---------------------------------------------------------------------------
 
+
+    # ---------------------------------------------------------------------------
+    # Security services
+    # ---------------------------------------------------------------------------
     App\Security\:
         resource: '../src/Security'
 
+
+
     # ---------------------------------------------------------------------------
+    # Services
+    # ---------------------------------------------------------------------------
+    App\Service\:
+        resource: '../src/Service'
+
     # Middleware service that perform after-controller operations for api queries
     # ---------------------------------------------------------------------------
-
-    App\Controller\Api\EnableApi\:
-        resource: '../src/Controller/Api/EnableApi'
+    App\Service\Api\EnableApi\:
+        resource: '../src/Service/Api/EnableApi'
         tags:
             - { name: kernel.event_listener, event: kernel.response, priority: 254 }
         bind:
-            $enableCORS: '%app.ENABLE_CORS%'
+            $enableCORS: '%app.ENABLE_CORS%' #Check ENABLE_CORS variable from this config
+
+    # Middleware service that determine & setup user locale
+    # ---------------------------------------------------------------------------
+    App\Service\Locale\:
+        resource: '../src/Service/Locale'
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, priority: 20 }
+        bind:
+            $enableLocale: '%app.ENABLE_LOCALE%' # Check ENABLE_CORS variable from this config
+            $defaultLocale: '%kernel.default_locale%' # Default locale from translation.yaml
+
+    # Store user locale in session based on user entity
+    # ---------------------------------------------------------------------------
+    App\Service\Locale\EventSubscriber\:
+        resource: '../src/Service/Locale/EventSubscriber'
+        bind:
+             $enableLocale: '%app.ENABLE_LOCALE%' # Check ENABLE_CORS variable from this config
+             $defaultLocale: '%kernel.default_locale%' # Default locale from translation.yaml
